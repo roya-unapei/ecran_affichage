@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/logo unapei.png">
+  <title>Page 1</title>
+</head>
+
+<body onLoad="displayUI();">
+  <main id="main-container" role="main" class="container">
+    <div id="content" style="display: none;">
+    <!--  <h4>Welcome <span id="userName"></span></h4>   -->
+    </div>
+
+    <div class = conteneur1>
+      <div id="eventWrapper" style="display: none;"></div>
+    </div>
+    
+
+    <div class = conteneur2>
+      <div class = logo>
+        <img src="./images/logo unapei.png" alt="Unapei" >
+      </div>
+    
+      <div class = rectangleDH>
+        <div class = dateHeure>
+            <p id = "date" > </p>
+            <p id = "heure" > </p>
+        </div>
+      </div>
+      <!-- <div class = rapidMooc>
+          <p>Rapid Mooc</p>
+      </div> -->
+
+    </div>
+
+  </main>
+  <script>
+    
+    function pause(ms) 
+    {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function afficherDate() 
+    {
+      while(true) 
+      {
+        await pause(1000);
+        var cejour = new Date();
+        var options = {weekday: "long", year: "numeric", month: "long", day: "2-digit"};
+        var date = cejour.toLocaleDateString("fr-FR", options);
+        var heure = ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) ; // pour les secondes = + ":" + ("0" + cejour.getSeconds()).slice(-2) 
+        var datee = date;
+        var heuree = heure;
+        var datee = datee.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+        document.getElementById('date').innerHTML = datee;
+        document.getElementById('heure').innerHTML = heuree;
+        
+        var h = cejour.getHours();
+        aff(h);
+        
+      }
+    }
+    afficherDate();
+    
+    async function actualiserPage() 
+    {
+      while(true) 
+      {
+        await pause(100000);
+        window.location.reload();
+        
+      }
+    }
+  
+    actualiserPage();
+    
+      
+</script>
+  <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
+    integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+  <script src="auth.js"></script>
+  <script src="graph.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>

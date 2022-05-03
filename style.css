@@ -1,0 +1,63 @@
+html,body {
+    min-height:100vh;
+    min-width: 100vw;
+    overflow:hidden; 
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.conteneur1 {
+    float: left;
+    width:80%;
+    height: 100%;
+}
+
+
+.conteneur2{
+    float: right;
+    width : 20%;
+}
+
+.logo{
+    display: block;
+    margin: 0 auto;
+    margin-top: 4%;
+    text-align: center;
+}
+
+.logo img{
+    width: 60%;
+    height: auto;
+}
+.rectangleDH{
+    margin: 0 auto;
+    background-color: hsl(84, 29%, 90%, 0.5); /* 0.5 transparent*/
+    width: 230px;
+    height: 300px;
+    text-align: center;
+    font-size:30px;
+    font-family: "Open Sans", sans-serif;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/*.rapidMooc{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 230px;
+    height: 200px;
+    text-align: center;
+    background-color: #7F994C;
+    padding: 20px;
+    display: flex;
+}*/
+
+
+
+
+
+
