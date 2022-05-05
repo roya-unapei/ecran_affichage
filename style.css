@@ -8,6 +8,9 @@ html,body {
     display: flex;
     flex-direction: column;
   }
+  * {
+    box-sizing: border-box;
+  }
   
 .conteneur1 {
     float: left;
@@ -45,6 +48,12 @@ html,body {
     align-items: center;
 }
 
+@media only screen and (max-width: 620px) {
+    /* For mobile phones: */
+    .conteneur1, .conteneur2 {
+      width: 100%;
+    }
+}
 /*.rapidMooc{
     margin: 0 auto;
     margin-top: 50px;
