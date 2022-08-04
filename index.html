@@ -2,40 +2,106 @@
 <html lang="fr-FR">
 
 <head>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="icon" type="image/png" sizes="16x16" href="./images/logo unapei.png">
   <title>Page 1</title>
+<style>
+
+#logo img{
+    float: right;  
+    width: 100%;
+    height: auto;
+    margin-right: 10%;
+    margin-top: 2%;
+}
+#DH{
+    text-align: center;
+    font-size:30px;
+    font-family: "Open Sans", sans-serif;
+    align-items: center;
+    font-weight: bold;
+} 
+/* taille hauteur*/
+.col-sm-4{
+    height: 100%;
+    width: 30%;
+    align-items: center;
+    margin-left: 10px;
+    background-color: rgba(240, 229, 207, 0.63);
+}
+
+#time{
+  height: 100%;
+  width: 3%;
+  text-align: center;
+  font-size: 30px;
+}
+
+.col-sm-12.nomSalle{
+  text-align: center; 
+  font-size: 30px;
+  background-color: rgb(214, 168, 168);
+}
+/*
+.row{
+    overflow: hidden; 
+}*/
+
+
+</style>
 </head>
 
-<body onLoad="displayUI();">
-  <main id="main-container" role="main" class="container">
-    <div id="content" style="display: none;">
-    <!--  <h4>Welcome <span id="userName"></span></h4>   -->
+<body id="body" onLoad="displayUI();">
+  
+    <div class="container-fluid" style ="margin-left: 3%; margin-right: auto;">
+       <div class="row ">
+          <!-- Partie 1 -->
+            <div class="row ">
+                <div class="col-sm-5  col-sm-offset-3 " style="background-color:rgba(240, 229, 207, 0.63)">
+                    <div class = dateHeure>
+                        <p id = "DH" > </p>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-sm-offset-3">
+                    <div id= logo>
+                        <img src="./images/LogoUnapei_Quadri.png" alt="Unapei" >
+                    </div>
+                </div>
+            </div>
+
+          <!-- Partie 2 -->
+            <div class="row salles" id ="salles">
+                <div class="col-sm-12"></div>  <!-- remettre un margin top = 2em -->
+
+                <div class="col-sm-1" id ="time" style="background-color:rgba(214, 183, 183, 0.616);">
+                  <div class="row">
+                    <div class="col-sm-12 "> &nbsp;</div>
+                  </div>
+                </div>
+                <div class="col-3 col-sm-4" id ="Cour" >
+                  <div class="row">
+                      <div class="col-sm-12 nomSalle" > <strong>&#x2190; &nbsp;COUR</strong> </div>
+                  </div>
+                </div>
+                <div class="col-3 col-sm-4 " id ="CA" >
+                    <div class="row">
+                      <div class="col-sm-12  nomSalle"><strong>CA &nbsp; &#x2191;</strong></div>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-4" id ="Rue" >
+                    <div class="row">
+                      <div class="col-sm-12  nomSalle"><strong>RUE &nbsp; &#x2192;</strong></div>
+                    </div>
+                </div>
+            </div>  
+ 
+        </div> 
+
     </div>
-
-    <div class = conteneur1>
-      <div id="eventWrapper" style="display: none;"></div>
-    </div>
-    
-
-    <div class = conteneur2>
-      <div class = logo>
-        <img src="./images/logo unapei.png" alt="Unapei" >
-      </div>
-    
-      <div class = rectangleDH>
-        <div class = dateHeure>
-            <p id = "date" > </p>
-            <p id = "heure" > </p>
-        </div>
-      </div>
-      <!-- <div class = rapidMooc>
-          <p>Rapid Mooc</p>
-      </div> -->
-
-    </div>
-
-  </main>
+  
   <script>
     
     function pause(ms) 
@@ -55,11 +121,13 @@
         var datee = date;
         var heuree = heure;
         var datee = datee.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
-        document.getElementById('date').innerHTML = datee;
-        document.getElementById('heure').innerHTML = heuree;
+        var DH = date.charAt(0).toUpperCase() + date.slice(1)+ " " + heure;
+        document.getElementById('DH').innerHTML = DH;
         
         var h = cejour.getHours();
-        aff(h);
+        var min = cejour.getMinutes();
+        
+       aff(h, min);
         
       }
     }
@@ -74,16 +142,13 @@
         
       }
     }
-  
     actualiserPage();
-    
-      
 </script>
   <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
     integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
-  <script src="auth.js"></script>
+<script src="auth.js"></script>
   <script src="graph.js"></script>
   <script src="ui.js"></script>
 </body>
