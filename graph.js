@@ -27,7 +27,7 @@ async function getEvents(elem) { ///****************
     const formatted_date = dateNow.getFullYear() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getDate()
 
 
-    const query = `startDateTime=2022-06-28T07:00:00.043Z&endDateTime=2022-06-28T20:00:00.043Z`; // pour afficher les évènements du jour
+    const query = `startDateTime=2022-03-29T07:00:00.043Z&endDateTime=2022-03-29T20:00:00.043Z`; // pour afficher les évènements du jour
     //console.log(query); // au lieu de faire dateNow.toISOString() => startDateTime=2022-03-22T10:59:55.043Z&endDateTime=2022-03-29T09:59:55.043Z
     // startDateTime=${formatted_date}T07:00:00.043Z&endDateTime=${formatted_date}T20:00:00.043Z
     //test : startdatetime=2022-04-04T07:21:18.022Z&enddatetime=2022-04-11T18:21:18.022Z

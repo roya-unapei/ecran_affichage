@@ -18,8 +18,9 @@
     margin-top: 2%;
 }
 #DH{
+  margin-left : 2em;
     text-align: center;
-    font-size:30px;
+    font-size:60px;
     font-family: "Open Sans", sans-serif;
     align-items: center;
     font-weight: bold;
@@ -29,21 +30,25 @@
     height: 100%;
     width: 30%;
     align-items: center;
-    margin-left: 10px;
-    background-color: rgba(240, 229, 207, 0.63);
+    margin-left: 30px;
+    background-color: rgba(243, 228, 198, 0.63);
+    
 }
 
 #time{
   height: 100%;
   width: 3%;
   text-align: center;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .col-sm-12.nomSalle{
   text-align: center; 
-  font-size: 30px;
-  background-color: rgb(214, 168, 168);
+  font-size: 40px;
+  background-color: #cab495;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  
 }
 /*
 .row{
@@ -54,13 +59,13 @@
 </style>
 </head>
 
-<body id="body" onLoad="displayUI();">
+<body id="body" onLoad="displayUI();" > <!--style="overflow: hidden;" bloquer le scroll-->
   
     <div class="container-fluid" style ="margin-left: 3%; margin-right: auto;">
        <div class="row ">
           <!-- Partie 1 -->
             <div class="row ">
-                <div class="col-sm-5  col-sm-offset-3 " style="background-color:rgba(240, 229, 207, 0.63)">
+                <div class="col-sm-5  col-sm-offset-3 " style=" margin-top: 2px;"> <!-- background: linear-gradient(hsla(225, 33%, 72%, 0.445), white); background-color:#A0ACCF;-->
                     <div class = dateHeure>
                         <p id = "DH" > </p>
                     </div>
@@ -74,24 +79,24 @@
 
           <!-- Partie 2 -->
             <div class="row salles" id ="salles">
-                <div class="col-sm-12"></div>  <!-- remettre un margin top = 2em -->
+                <div class="col-sm-12" style = "margin-top : 2em;"></div>  <!-- style = "margin-top : 2em;" style="background-color:rgba(214, 183, 183, 0.616);"-->
 
-                <div class="col-sm-1" id ="time" style="background-color:rgba(214, 183, 183, 0.616);">
-                  <div class="row">
+                <div class="col-sm-1" id ="time" >
+                  <div class="row" id ="timee">
                     <div class="col-sm-12 "> &nbsp;</div>
                   </div>
                 </div>
-                <div class="col-3 col-sm-4" id ="Cour" >
+                <div class="col-3 col-sm-4" id ="Cour" style="border-radius: 30px">
                   <div class="row">
                       <div class="col-sm-12 nomSalle" > <strong>&#x2190; &nbsp;COUR</strong> </div>
                   </div>
                 </div>
-                <div class="col-3 col-sm-4 " id ="CA" >
+                <div class="col-3 col-sm-4 " id ="CA" style="border-radius: 30px">
                     <div class="row">
                       <div class="col-sm-12  nomSalle"><strong>CA &nbsp; &#x2191;</strong></div>
                     </div>
                 </div>
-                <div class="col-3 col-sm-4" id ="Rue" >
+                <div class="col-3 col-sm-4" id ="Rue" style="border-radius: 30px">
                     <div class="row">
                       <div class="col-sm-12  nomSalle"><strong>RUE &nbsp; &#x2192;</strong></div>
                     </div>
