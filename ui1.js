@@ -1,9 +1,17 @@
+var tab=new Array();
+var p = 0; //tableau horaires
+
+
 //mettre en évidence l'heure actuelle
 async function aff(h, min){
   var j = h - 1;
   var divHeure;
   var combi;
   var combi2;
+
+  if (j == 9 || j ==8){
+    j = '0' + j;
+  }
 
     if(0 <= min && min < 15){
       combi2= j + ":45.0";
@@ -19,13 +27,23 @@ async function aff(h, min){
       combi = h + ":45.0";
     }
    
-    if (document.getElementsByClassName('col-sm-12') && document.getElementById(combi)){ //savoir si la div avec l'heure existe
-      document.getElementById(combi2).style.backgroundColor = '#b2977248';
+    if (document.getElementsByClassName('col-sm-1') && document.getElementById(combi)){ //savoir si la div avec l'heure existe
+      //console.log(combi2);
+      document.getElementById(combi2).style.color = 'black';
       divHeure = document.getElementById(combi);
-      divHeure.style.backgroundColor = '#cab495';
-    }
+      divHeure.style.color = '#cab495';
 
-//colorer la réunion en cours faire : !!document.getElementId... pour savoir s'il existe ou pas return un booleen
+    }
+    
+    for (var i=0; i<tab.length; i++) { // réunion en cours
+        if ((tab[i][0] < h) && (h < tab[i][2])){
+            document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cab495';   
+        }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cab495';   
+        }else{
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = 'transparent'; 
+        }
+    }
 
 }
 
@@ -50,18 +68,19 @@ async function displayUI() {
 async function creationHoraires(salle,x){
 var combi;
 
-  for (var h = 8; h<=18; ++h){ // heures
+  for (var h = 8; h<=12; ++h){ // heures
     
     var min = 0; // nouvelle heure donc min à 0
     
     for (var i = 1; i<=4; ++i){ // quart d'heure
 
       combi = h+":"+min;
-
-      
+     
       var divH = document.createElement('div');
+      salle.appendChild(divH);
+
       //divH.style.borderTop = "1px solid rgba(240, 229, 207, 0.63)";
-      divH.style.fontSize = "25px";
+      divH.style.fontSize = "20px";
       divH.style.height = "30px";
 
       if(h==8 || h== 9){
@@ -72,7 +91,7 @@ var combi;
         divH.style.borderTop = "1px solid rgba(240, 229, 207, 0.63)";
         divH.style.fontWeight = "bold";
         divH.style.color = "black";
-        //divH.style.textDecoration = "overline";
+        
       }
 
       divH.setAttribute("id", combi+"."+x);
@@ -80,27 +99,8 @@ var combi;
       if (x != 0 || min == 15 || min == 45){ // ne pas afficher les horaires dans les div des réunions ni ceux de 15 et 45
         divH.innerHTML = "&nbsp;";
       }else{
-        divH.innerHTML = combi;
-      }
-
-
-      if (x == 0){ //délimiter matin et après-midi
-        var col = document.createElement('div');
-        col.className = 'col-sm-12';
-        col.setAttribute('id', combi + '.' + x)
-        if (combi == "12:45" || combi == "13:00" ||combi == "13:15" ||combi == "13:30" ||combi == "13:45"){
-          col.style.backgroundColor = "white";
-        }else{
-          col.style.backgroundColor = "#b2977248";
-        }
-        
-
-        col.appendChild(divH);
-        var row = document.getElementById("timee");
-        row.appendChild(col);
-        salle.appendChild(row);
-      }else{
-        salle.appendChild(divH);
+        divH.innerHTML = combi ;
+        divH.style.textDecoration = "overline";
       }
       
       min +=15;
@@ -127,7 +127,7 @@ async function displayEvents(elem, i) {
   events.value.forEach(event => { // boucle pour afficher tous les évènements
     var heureD = new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}); 
     var heureF = new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit' , minute: '2-digit'});
-    var query = "<p style = 'font-size : 19px; color:black'; ><b>"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"<span style='float: right'>" + ` Resp : ${event.organizer.emailAddress.name}` + "</span></p><p id = 'nomReunion"+ z + "." + i +"' style =  'color :black; text-align: center; font-size : 25px;'> " + `${event.subject}` + "</b></p>";
+    var query = "<strong><p style = 'font-size : 19px; float: left; margin-block-end: 0em;' >"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"</p><p style='float: right;  font-size : 19px; margin-block-end: 0em;'>" + ` Resp : ${event.organizer.emailAddress.name}` + "</p><p id = 'nomReunion"+ z + "." + i +"' style =  ' text-align: center; font-size : 25px; clear : both ;'> " + `${event.subject}` + "</p></strong>";
     
     //création des éléments pour afficher les réunions
     const myArrayD = heureD.split(":");// console.log(heureD) == 08:00
@@ -136,24 +136,24 @@ async function displayEvents(elem, i) {
     /*myArrayD[0] = heure
     myArrayD[1] = min*/
 
-
-    if (myArrayD[0] > 18){ // reunion à partir de 19h...
-      var divH = document.createElement('div');     
-      divH.setAttribute("id", "heureSup");
-      divH.style.fontSize = "25px";
-      divH.innerHTML = query;
-      divH.style.borderTop = "1px solid black";
-      divH.style.borderBottom = "1px solid black";
-      salle.appendChild(divH);
-    }else {
+    if (myArrayD[0] <= 12){ //pour ne pas afficher les réunions à partir de 13h
 
       var div = document.getElementById(heureD+"."+i); 
-    
-      div.innerHTML = query;
+      
       div.style.borderTop = "1px solid black";
       div.style.borderBottom = "1px solid black";
       div.style.overflow = "hidden";
 
+      if(myArrayF[0] > 12){
+        myArrayF[0] = 13;
+        myArrayF[1] = 00;
+        heureF = "13:00";
+        //div.style.borderBottom = "none";
+      }
+      tab[p]=new Array(myArrayD[0],myArrayD[1], myArrayF[0], myArrayF[1], i); // utiliser ce tableau pour savoir s'il y a un réunion en cours dans la fonction aff, i = num salle
+       ++p;
+
+      div.innerHTML = query;
 
       var resu = 0; //compter nombre de cases
       var min = Number(myArrayD[1]) + 15;
@@ -172,7 +172,6 @@ async function displayEvents(elem, i) {
                   }
                   resu+=1;
                   min +=15;
-                  //console.log("test " + combi);
 
                   if(combi == heureF){
                     //console.log("ok pour " + heureF + " nb div : " + resu);
@@ -192,7 +191,8 @@ async function displayEvents(elem, i) {
             document.getElementById("nomReunion"+z +"."+i).style.marginTop= op+"px";
             document.getElementById("nomReunion"+z +"."+i).style.fontSize = "32px";
             ++z;
-    }
+          }
+
     
   });
 
