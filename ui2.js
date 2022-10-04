@@ -4,7 +4,7 @@ var tab=new Array();
 var p = 0; //tableau horaires
 
 async function aff(h, min){
-  var j = h - 1;
+  /*var j = h - 1;
   var divHeure;
   var combi;
   var combi2;
@@ -25,22 +25,27 @@ async function aff(h, min){
    
     if (document.getElementsByClassName('col-sm-1') && document.getElementById(combi)){ //savoir si la div avec l'heure existe
 // colorer div temps  
-      document.getElementById(combi2).style.color = 'black';
-      divHeure = document.getElementById(combi);
-      divHeure.style.color = '#cab495';
+      if(combi2.indexOf('00') != -1){
+        document.getElementById(combi2).style.color = 'black';
+      }else{
+        document.getElementById(combi2).style.color = '#86BBD8';
+      }
 
-    }
+      divHeure = document.getElementById(combi);
+      divHeure.style.color = '#53565738';
+
+    }*/
 // colorer réunion en cours    
     for (var i=0; i<tab.length; i++) { // réunion en cours
         if ((tab[i][0] < h) && (h < tab[i][2])){
-            document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cab495';   
+            document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#53565738';   
         }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
-          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cab495';   
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#53565738';   
         }else{
-          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = 'transparent'; 
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cfcfce8c'; 
         }
     }
-
+    
 }
 
 async function displayUI() {    
@@ -72,7 +77,6 @@ var combi;
 
       combi = h+":"+min;
 
-      
       var divH = document.createElement('div');
       salle.appendChild(divH);
       //divH.style.borderTop = "1px solid rgba(240, 229, 207, 0.63)";
@@ -84,10 +88,9 @@ var combi;
       }
       if (min==0){
         combi = combi + "0";
-        divH.style.borderTop = "1px solid rgba(240, 229, 207, 0.63)";
+        divH.style.borderTop = "1px solid #cfcfce8c";
         divH.style.fontWeight = "bold";
         divH.style.color = "black";
-        //divH.style.textDecoration = "overline";
       }
 
       divH.setAttribute("id", combi+"."+x);
@@ -123,7 +126,7 @@ async function displayEvents(elem, i) {
   events.value.forEach(event => { // boucle pour afficher tous les évènements
     var heureD = new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}); 
     var heureF = new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit' , minute: '2-digit'});
-    var query = "<strong><p style = 'font-size : 19px; float: left; margin-block-end: 0em;' >"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"</p><p style='float: right;  font-size : 19px; margin-block-end: 0em;'>" + ` Resp : ${event.organizer.emailAddress.name}` + "</p><p id = 'nomReunion"+ z + "." + i +"' style =  ' text-align: center; font-size : 25px; clear : both ;'> " + `${event.subject}` + "</p></strong>";
+    var query = "<strong><p style = 'float: left; margin-block-end: 0em;' >"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"</p><p style='float: right;  margin-block-end: 0em;'>" + ` Resp : ${event.organizer.emailAddress.name}` + "</p><p id = 'nomReunion"+ z + "." + i +"' style =  ' text-align: center;  clear : both ;'> " + `${event.subject}` + "</p></strong>";
     
     //création des éléments pour afficher les réunions
     const myArrayD = heureD.split(":");// console.log(heureD) == 08:00
@@ -150,16 +153,16 @@ async function displayEvents(elem, i) {
           divH.setAttribute("id", "heureSup");
           divH.style.fontSize = "25px";
           divH.innerHTML = query;
-          divH.style.borderTop = "1px solid black";
-          divH.style.borderBottom = "1px solid black";
+          /*divH.style.borderTop = "1px solid #cfcfce8c";
+          divH.style.borderBottom = "1px solid #cfcfce8c";*/
           salle.appendChild(divH);
         }else {
 
           var div = document.getElementById(heureD+"."+i); 
         
           div.innerHTML = query;
-          div.style.borderTop = "1px solid black";
-          div.style.borderBottom = "1px solid black";
+          div.style.borderRadius = "10px";
+          div.style.boxShadow = "0px 5px 2px grey";
           div.style.overflow = "hidden";
 
 
@@ -186,19 +189,27 @@ async function displayEvents(elem, i) {
                         //console.log("ok pour " + heureF + " nb div : " + resu);
                         break;
                       }else {
-                        var supp_div =document.getElementById(combi+"."+i);
+                        var supp_div = document.getElementById(combi+"."+i);
                         supp_div.parentNode.removeChild(supp_div);
                       }
                     }
                     min = 0;
                 }
 
+                
+
                 //redefinir la taille de la div qui contient la réunion
                 var t = 30 * resu; //30 = taille définit lors de la création d'une div
                 div.style.height = t+"px";
                 var op = t /2 - 45;
                 document.getElementById("nomReunion"+z +"."+i).style.marginTop= op+"px";
-                document.getElementById("nomReunion"+z +"."+i).style.fontSize = "32px";
+                if (resu == 2 || resu == 1){ //réunion de 30 min diminuer la police
+                  div.style.fontSize = "15px";
+                  document.getElementById("nomReunion"+z +"."+i).style.fontSize = "25px";
+                }else{
+                  document.getElementById("nomReunion"+z +"."+i).style.fontSize = "32px";
+                }
+                
                 ++z;
         }
     }

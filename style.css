@@ -1,72 +1,43 @@
-html,body {
-    min-height:100vh;
-    min-width: 100vw;
-    overflow:hidden; 
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  
-.conteneur1 {
-    float: left;
-    width:80%;
-    height: 100%;
-}
-
-
-.conteneur2{
-    float: right;
-    width : 20%;
-}
-
-.logo{
-    display: block;
-    margin: 0 auto;
-    margin-top: 4%;
-    text-align: center;
-}
-
-.logo img{
-    width: 60%;
+#logo img{
+    float: right;  
+    width: 100%;
     height: auto;
+    margin-right: 10%;
+    margin-top: 2%;
 }
-.rectangleDH{
-    margin: 0 auto;
-    background-color: hsl(84, 29%, 90%, 0.5); /* 0.5 transparent*/
-    width: 230px;
-    height: 300px;
+#DH{
+  margin-left : 2em;
     text-align: center;
-    font-size:30px;
-    font-family: "Open Sans", sans-serif;
-    padding: 20px;
-    display: flex;
+    font-size:35px;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     align-items: center;
+    font-weight: bold;
+} 
+/* taille hauteur*/
+.col-sm-4{
+    height: 100%;
+    width: 30%;
+    align-items: center;
+    margin-left: 30px;
+    background-color: #e6e7e5;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color : black;
 }
 
-@media only screen and (max-width: 620px) {
-    /* For mobile phones: */
-    .conteneur1, .conteneur2 {
-      width: 100%;
-    }
+#time{
+  height: 100%;
+  width: 3%;
+  text-align: center;
+  font-size: 40px;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  color: #00aac7;/*92b4d2 */
 }
-/*.rapidMooc{
-    margin: 0 auto;
-    margin-top: 50px;
-    width: 230px;
-    height: 200px;
-    text-align: center;
-    background-color: #7F994C;
-    padding: 20px;
-    display: flex;
-}*/
 
-
-
-
-
-
+.col-sm-12.nomSalle{
+  text-align: center; 
+  font-size: 40px;
+  background-color: #3ebdd4; /*#92b4d2*/
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}

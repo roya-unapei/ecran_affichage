@@ -4,7 +4,6 @@ const msalConfig = {
         clientId: "c905c323-28b2-4992-8886-9ade22b10d9f",
         authority: "https://login.microsoftonline.com/1df2c0db-d42e-46cd-919b-effb2270c893",
         redirectUri: "http://localhost:8080",
-        //redirectUri: "http://localhost",
     }
 };
 const msalRequest = { scopes: [] };

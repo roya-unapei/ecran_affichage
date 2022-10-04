@@ -3,53 +3,40 @@
 
 <head>
     <meta charset="utf-8">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" media="all" type="text/css" href="style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="icon" type="image/png" sizes="16x16" href="./images/logo unapei.png">
-  <title>Page 2</title>
+  <title>Après-midi</title>
 <style>
 
-#logo img{
-    float: right;  
-    width: 100%;
-    height: auto;
-    margin-right: 10%;
-    margin-top: 2%;
-}
-#DH{
-  margin-left : 2em;
-    text-align: center;
-    font-size:35px;
-    font-family: "Open Sans", sans-serif;
-    align-items: center;
-    font-weight: bold;
-} 
-/* taille hauteur*/
-.col-sm-4{
-    height: 100%;
-    width: 30%;
-    align-items: center;
-    margin-left: 30px;
-    background-color: rgba(243, 228, 198, 0.63);
-    
+/* Animation */
+
+#Cour, #CA, #Rue {
+  position: relative;
+  animation: redBox 5s ;
 }
 
-#time{
-  height: 100%;
-  width: 3%;
-  text-align: center;
-  font-size: 40px;
+@keyframes redBox {
+  0% {
+    top: 400px;
+  }
+  50% {
+    top: 0px;
+  }
 }
 
-.col-sm-12.nomSalle{
-  text-align: center; 
-  font-size: 40px;
-  background-color: #cab495;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  
+@-webkit-keyframes redBox {
+  0% {
+    top: 400px;
+  }
+  50% {
+    top: 0px;
+  }
 }
+
 /*
 .row{
     overflow: hidden; 
@@ -59,7 +46,7 @@
 </style>
 </head>
 
-<body id="body" onLoad="displayUI();" > <!--style="overflow: hidden;" bloquer le scroll-->
+<body id="body" onLoad="displayUI(13);" style="overflow: hidden;" > <!--style="overflow: hidden;" bloquer le scroll-->
   
     <div class="container-fluid" style ="margin-left: 3%; margin-right: auto;">
        <div class="row ">
@@ -78,30 +65,33 @@
             </div>
 
           <!-- Partie 2 -->
-            <div class="row salles" id ="salles">
-                <div class="col-sm-12" style = "margin-top : 2em;"></div>  <!-- style = "margin-top : 2em;" style="background-color:rgba(214, 183, 183, 0.616);"-->
-
-                <div class="col-sm-1" id ="time" >
-                  <div class="row" id ="timee">
-                    <div class="col-sm-12 "> &nbsp;</div>
-                  </div>
+          <div class="row salles" id ="salles">
+            <div class="col-sm-12" style = "margin-top : 2em;"></div>  
+            
+            <div class="col-sm-1" id ="time" >
+              <div class="row timee" id ="timee">
+                <div class="col-sm-12 "> &nbsp;</div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-4"  style="border-radius: 30px">
+              <div class="row">
+                  <div class="col-sm-12 nomSalle"> <strong>&#x2190; &nbsp;COUR</strong> </div>
+                  <div class="col-sm-12" id ="Cour"></div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-4 "  style="border-radius: 30px">
+                <div class="row">
+                  <div class="col-sm-12  nomSalle" ><strong>CA &nbsp; &#x2191;</strong></div>
+                  <div class="col-sm-12" id ="CA"></div>
                 </div>
-                <div class="col-3 col-sm-4" id ="Cour" style="border-radius: 30px">
-                  <div class="row">
-                      <div class="col-sm-12 nomSalle" > <strong>&#x2190; &nbsp;COUR</strong> </div>
-                  </div>
+            </div>
+            <div class="col-3 col-sm-4" style="border-radius: 30px">
+                <div class="row">
+                  <div class="col-sm-12  nomSalle"><strong>RUE &nbsp; &#x2192;</strong></div>
+                  <div class="col-sm-12" id ="Rue"></div>
                 </div>
-                <div class="col-3 col-sm-4 " id ="CA" style="border-radius: 30px">
-                    <div class="row">
-                      <div class="col-sm-12  nomSalle"><strong>CA &nbsp; &#x2191;</strong></div>
-                    </div>
-                </div>
-                <div class="col-3 col-sm-4" id ="Rue" style="border-radius: 30px">
-                    <div class="row">
-                      <div class="col-sm-12  nomSalle"><strong>RUE &nbsp; &#x2192;</strong></div>
-                    </div>
-                </div>
-            </div>  
+            </div>
+        </div>  
  
         </div> 
 
@@ -113,7 +103,6 @@
     {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
-
     async function afficherDate() 
     {
       while(true) 
@@ -140,15 +129,35 @@
     
     async function actualiserPage() 
     {
+      var cejour = new Date();
+      var h = cejour.getHours();
       while(true) 
       {
-        await pause(10000);
-        //window.location.reload();
-       document.location.href="index.html";
-        
+        if( h >= 13){
+          await pause(25000);
+          animation();
+          await pause(1500);
+        }else{
+          await pause(15000);
+            animation();
+          await pause(1500);
+        }
+        document.location.href="index.html";
       }
     }
     actualiserPage();
+
+    function animation(){
+    
+      var salles = [ "Cour",  "CA", "Rue"]; 
+    
+      salles.forEach(elem => {
+          document.getElementById(elem).style.opacity = "0";
+          document.getElementById(elem).style.transition = "opacity 1s";
+      });
+      
+    }
+    
 </script>
   <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
     integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
@@ -156,6 +165,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
 <script src="auth.js"></script>
   <script src="graph.js"></script>
-  <script src="ui2.js"></script>
+  <script src="Ui.js"></script>
 </body>
 </html>
