@@ -13,8 +13,8 @@
 <style>
 
 /* Animation */
-
-#Cour, #CA, #Rue {
+/*
+#Cour, #CA, #Rue, #time {
   position: relative;
   animation: redBox 5s ;
 }
@@ -35,7 +35,7 @@
   50% {
     top: 0px;
   }
-}
+}*/
 
 /*
 .row{
@@ -98,7 +98,7 @@
     </div>
   
   <script>
-    
+    animationEntree();
     function pause(ms) 
     {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -133,23 +133,22 @@
       var h = cejour.getHours();
       while(true) 
       {
-        if( h >= 13){
-          await pause(25000);
-          animation();
-          await pause(1500);
-        }else{
+        if( h < 13){ //si matin => redirection page index
           await pause(15000);
-            animation();
+          animationSortie();
           await pause(1500);
+          document.location.href="index.html";
+        }else{ //sinon actualiser la page
+          await pause(50000);
+          window.location.reload();
         }
-        document.location.href="index.html";
       }
     }
     actualiserPage();
 
-    function animation(){
+    function animationSortie(){
     
-      var salles = [ "Cour",  "CA", "Rue"]; 
+      var salles = [ "Cour",  "CA", "Rue", "time"]; 
     
       salles.forEach(elem => {
           document.getElementById(elem).style.opacity = "0";
@@ -157,6 +156,26 @@
       });
       
     }
+    
+    function animationEntree(){
+      var salles = [ "Cour",  "CA", "Rue", "time"]; 
+      var cejour = new Date();
+      var h = cejour.getHours();
+      
+      if( h < 13){
+        salles.forEach(elem => {
+              document.getElementById(elem).animate([
+                // étapes/keyframes
+                { transform: 'translateY(400px)' },
+                { transform: 'translateY(0px)' }
+              ], {
+                // temporisation
+                duration: 1600,
+              });
+          });
+      }
+    
+  }
     
 </script>
   <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"

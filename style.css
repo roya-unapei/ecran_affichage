@@ -5,6 +5,7 @@
     margin-right: 10%;
     margin-top: 2%;
 }
+/*Date et Heure*/
 #DH{
   margin-left : 2em;
     text-align: center;
@@ -19,9 +20,12 @@
     width: 30%;
     align-items: center;
     margin-left: 30px;
-    background-color: #e6e7e5;
-    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    
+    background-color:  white;
+    /*font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;*/
+    font-family: "Fira Sans", Arial, sans-serif;
     color : black;
+    border: solid 1px gray;
 }
 
 #time{
@@ -29,15 +33,18 @@
   width: 3%;
   text-align: center;
   font-size: 40px;
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  color: #00aac7;/*92b4d2 */
+  font-family: "Fira Sans", Arial, sans-serif;
+  color: #468cb5;
+  /*color: #9dadbd6e*/
 }
 
+/*Entête : nom des salles*/
 .col-sm-12.nomSalle{
   text-align: center; 
   font-size: 40px;
-  background-color: #3ebdd4; /*#92b4d2*/
+  color : white;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-family: "Fira Sans", Arial, sans-serif;
+  background-color: #034f70;
 }

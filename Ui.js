@@ -9,11 +9,13 @@ async function aff(h, min){
 // colorer réunion en cours    
   for (var i=0; i<tab.length; i++) {
       if ((tab[i][0] < h) && (h < tab[i][2])){ 
-          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#53565738';//changer couleur réunion en cours
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
+          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
       }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
-        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#53565738';//changer couleur réunion en cours
+        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
+        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
       }else{
-        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#cfcfce8c'; //autres réunions
+        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#c5d6e6'; //autres réunions
       }
   }
 }
@@ -100,7 +102,7 @@ async function displayEvents(elem, i) {
     events.value.forEach(event => { // boucle pour afficher tous les évènements
         var heureD = new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}); 
         var heureF = new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit' , minute: '2-digit'});
-        var query = "<strong><p style = 'float: left; margin-block-end: 0em;' >"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"</p><p style='float: right; margin-block-end: 0em;'>" + ` Resp : ${event.organizer.emailAddress.name}` + "</p><p id = 'nomReunion"+ z + "." + i +"' style =  ' text-align: center; font-size : 25px; clear : both ;'> " + `${event.subject}` + "</p></strong>";
+        var query = "<strong><p id = 'dateEtHeure' style = 'float: left; margin-block-end: 0em; color : black; ' >"+`${new Date(event.start.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} à ${new Date(event.end.dateTime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} `+"</p><p id = 'responsable' style='float: right; margin-block-end: 0em; color : black;'>" + ` ${event.organizer.emailAddress.name}` +"</p><p id = 'nomReunion"+ z + "." + i +"' style =  ' text-align: center; font-size : 25px; clear : both ;'> " + `${event.subject}` + "</p></strong>";
     
         //création des éléments pour afficher les réunions
         const myArrayD = heureD.split(":");// console.log(heureD) == 08:00
@@ -125,8 +127,10 @@ async function ajouterReu(query, myArrayD, myArrayF, heureD, heureF, z, i){
     var div = document.getElementById(heureD+"."+i);
 
     div.style.borderRadius = "10px";
-    div.style.boxShadow = "0px 5px 2px grey";
+    div.style.boxShadow = "0px 2px 1px grey";
+    div.style.borderColor = "white";
     div.style.overflow = "hidden";
+    div.style.backgroundColor = "#c5d6e6";
     div.innerHTML = query;
     
     var resu = 0; //compter nombre de cases
@@ -166,7 +170,6 @@ async function ajouterReu(query, myArrayD, myArrayF, heureD, heureF, z, i){
         div.style.fontSize = "15px";
         document.getElementById("nomReunion"+z +"."+i).style.fontSize = "25px";
       }else{
-        console.log("nomReunion"+z +"."+i);
         document.getElementById("nomReunion"+z +"."+i).style.fontSize = "32px";
       }
 }
