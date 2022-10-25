@@ -8,15 +8,15 @@ var hmax =0; // fin des horaires en fonction de la page
 async function aff(h, min){
 // colorer réunion en cours    
   for (var i=0; i<tab.length; i++) {
-      if ((tab[i][0] < h) && (h < tab[i][2])){ 
-          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
-          document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
-      }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
+    if ((tab[i][0] < h) && (h < tab[i][2])){ 
         document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
         document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
-      }else{
-        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#c5d6e6'; //autres réunions
-      }
+    }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
+      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
+      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
+    }else{
+      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#c5d6e6'; //autres réunions
+    }
   }
 }
 
@@ -164,11 +164,14 @@ async function ajouterReu(query, myArrayD, myArrayF, heureD, heureF, z, i){
       var t = 30 * resu; //30 = taille définit lors de la création d'une div
       div.style.height = t+"px";
       var op = t /2 - 45;
-      document.getElementById("nomReunion"+z +"."+i).style.marginTop= op+"px";
-
+      console.log(op);
+      document.getElementById("nomReunion"+z +"."+i).style.marginTop= op+"px"; // permet de centrer le texte
+      
       if (resu == 2 || resu == 1){ //réunion de 30 min diminuer la police
         div.style.fontSize = "15px";
         document.getElementById("nomReunion"+z +"."+i).style.fontSize = "25px";
+      }else if (op>= 80){ //si le margin top est sup à 80 (cad que la réunion dure plus de 2h) alors augmenter la taille du texte
+        document.getElementById("nomReunion"+z +"."+i).style.fontSize = "38px";
       }else{
         document.getElementById("nomReunion"+z +"."+i).style.fontSize = "32px";
       }
