@@ -31,7 +31,7 @@ async function getEvents(elem) {
     const query = `startDateTime=${formatted_date}T07:00:00.043Z&endDateTime=${formatted_date}T20:00:00.043Z`; // pour afficher les évènements du jour
     //console.log(query); // au lieu de faire dateNow.toISOString() => startDateTime=2022-03-22T10:59:55.043Z&endDateTime=2022-03-29T09:59:55.043Z
     // startDateTime=${formatted_date}T07:00:00.043Z&endDateTime=${formatted_date}T20:00:00.043Z
-    //test : startdatetime=2022-10-27T07:21:18.022Z&enddatetime=2022-10-27T18:21:18.022Z
+    //test : startdatetime=2022-10-20T07:21:18.022Z&enddatetime=2022-10-20T18:21:18.022Z
     return await graphClient
     .api('/users/' + elem + '/calendarview').query(query) 
     .select('subject,start,end, attendees, organizer') // données à utiliser dans ui.js pour l'affichage

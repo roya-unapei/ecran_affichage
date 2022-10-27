@@ -9,13 +9,13 @@ async function aff(h, min){
 // colorer réunion en cours    
   for (var i=0; i<tab.length; i++) {
     if ((tab[i][0] < h) && (h < tab[i][2])){ 
-        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
+        document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#84A9AC';//changer couleur réunion en cours
         document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
     }else if ((tab[i][0] == h &&  tab[i][1] <= min) || (tab[i][2] == h &&  tab[i][3] > min)){
-      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#468cb5';//changer couleur réunion en cours
+      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#84A9AC';//changer couleur réunion en cours
       document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.color = 'white';//changer couleur réunion en cours
     }else{
-      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#c5d6e6'; //autres réunions
+      document.getElementById(tab[i][0] + ":" + tab[i][1] + "." + tab[i][4]).style.backgroundColor = '#b1b0ae6e'; //autres réunions b1b0ae6e  ece9e5b7
     }
   }
 }
@@ -128,9 +128,9 @@ async function ajouterReu(query, myArrayD, myArrayF, heureD, heureF, z, i){
 
     div.style.borderRadius = "10px";
     div.style.boxShadow = "0px 2px 1px grey";
-    div.style.borderColor = "white";
+    div.style.borderColor = "#grey";
     div.style.overflow = "hidden";
-    div.style.backgroundColor = "#c5d6e6";
+    div.style.backgroundColor = "#b1b0ae6e";
     div.innerHTML = query;
     
     var resu = 0; //compter nombre de cases
